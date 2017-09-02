@@ -12,12 +12,19 @@
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 
+%~ \guillemets[text] 
+%~ enclose the text between french quotes
+\newcommand{\guillemets}[1]{\og#1\fg{}}
 %-------------------------------------------------------------------------------
 %                Required Packages
 %-------------------------------------------------------------------------------
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage{enumerate}
+\usepackage[francais]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage[T1]{fontenc}
 
 %-------------------------------------------------------------------------------
 %                \addtitle command: add the title of the use case
@@ -29,28 +36,37 @@
 %-------------------------------------------------------------------------------
 %                \addfield command: add a property of the use case
 %-------------------------------------------------------------------------------
-\newcommand\addfield[2]{\textit{#1} &#2\\ [1ex] \hline \\ [-1.3ex] }
-\newcommand\addfieldnoline[2]{\textit{#1} &#2\\ [1ex] \\ [-1.3ex] }
+\newcommand\addfieldline[2]{\textbf{#1} &#2 \\ [1ex] \hline \\ [-1.3ex] }
+\newcommand\addfield[2]{\textbf{#1} &#2 \\ [1ex] }
 
+\newcommand\addline{ \hline \\ [-1.3ex] }
+
+% \newcommand\addmeta[2]{ \multicolumn{2}{l}{\textit{#1} #2} \\}
+\newcommand\addmeta[2]{ \textit{#1} &#2 \\ [1mm] \\ [-2ex] }
+\newcommand\addtwometa[4]{\textit{#1}  #2 & \textit{#3}  #4 \\ [1ex] }
 %-------------------------------------------------------------------------------
 %                \addscenario command: add the main (or alternative) scenario
 %                of the use case
 %-------------------------------------------------------------------------------
-\newcommand\addscenario[2]{ 
-\multicolumn{2}{l}{\textit{#1}} \\
+\newcommand\addsection[1]{
+    \addline
+    \multicolumn{2}{l}{ \textbf{#1} } \vspace{1.3ex} \\ [1ex]
+}
+
+\newcommand\addscenario[1]{ 
 \multicolumn{2}{l}{
 \begin{minipage}[t]{13.2cm}
-    \begin{enumerate} #2   \end{enumerate}
-    \vspace{1.3ex}
+    \begin{enumerate} #1   \end{enumerate}
+    \vspace{3ex}
 \end{minipage}
-} \\ [1ex] \hline \\ [-1.5ex] }
+} \\ } %[1ex] \hline \\ [-1.5ex] }
 
 %-------------------------------------------------------------------------------
 %                \additemizedfield command: add a field with an item list
 %-------------------------------------------------------------------------------
 \newcommand\additemizedfield[2]{ 
         \begin{minipage}[t][][t]{3.5cm}
-                \textit{#1}
+                \textbf{#1}
                 \vspace{1.3ex}
         \end{minipage}% 
    &
@@ -62,7 +78,7 @@
     
 \newcommand\additemizedfieldnoline[2]{ 
         \begin{minipage}[t][][t]{3.5cm}
-                \textit{#1}
+                \textbf{#1}
                 \vspace{1.3ex}
         \end{minipage}% 
    &
@@ -70,7 +86,8 @@
         \begin{itemize} #2   \end{itemize}
         \vspace{1.5ex}
     \end{minipage}\\ [1ex]\\ [-1.5ex] }
-
+  
+    
 %-------------------------------------------------------------------------------
 %                Definition of the use case environment
 %-------------------------------------------------------------------------------
